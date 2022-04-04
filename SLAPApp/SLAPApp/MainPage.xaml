@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SLAPApp.MainPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <!--GridServiceBar Pole-->
+        <Frame Grid.Row="0"/>
+        <Grid Grid.Row="0" x:Name="GridServiceBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" 
+                    Margin="5" 
+                    ImageSource="menu.png" 
+                    BackgroundColor="Transparent"/>
+            
+            <Button Grid.Column="2" 
+                    Margin="5" 
+                    ImageSource="setting.png" 
+                    BackgroundColor="Transparent"/>
+        </Grid>
+
+        <!--GridUser Pole-->
+        <Frame Grid.Row="1"/>
+        <Grid Grid.Row="1" x:Name="GridUser">
+            <Label Text="Рано или поздно что-то в корячим" 
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+        </Grid>
+
+        <!--GridBoardPanel Pole-->
+        <ScrollView Grid.Row="2">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="190"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="190"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="Личные доски" Margin="15,5" FontSize="20"/>
+
+                    <ScrollView Grid.Row="1" Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="FillAndExpand">
+                            <Button WidthRequest="160" 
+                            BackgroundColor="#E35930" 
+                            Margin="10"
+                            CornerRadius="15"/>
+                            <Button WidthRequest="160" 
+                            BackgroundColor="#34E330" 
+                            Margin="10"
+                            CornerRadius="15"/>
+                            <Button WidthRequest="160" 
+                            BackgroundColor="#F67A7A" 
+                            Margin="10"
+                            CornerRadius="15"/>
+                            <Button WidthRequest="160" 
+                            BackgroundColor="#E35930" 
+                            Margin="10"
+                            CornerRadius="15"/>
+                            <Button WidthRequest="160" 
+                            BackgroundColor="#FFBB24" 
+                            Margin="10"
+                            CornerRadius="15"/>
+                            <Button WidthRequest="160" 
+                            BackgroundColor="#F67A7A" 
+                            Margin="10"
+                            CornerRadius="15"/>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <Label Grid.Row="2" Text="Групповые доски" Margin="15,5" FontSize="20"/>
+
+                    <ScrollView Grid.Row="3" Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="FillAndExpand">
+                            <Button WidthRequest="160" 
+                                    BackgroundColor="#371969" 
+                                    Margin="10"
+                                    CornerRadius="15"/>
+                            <Button WidthRequest="160" 
+                                    BackgroundColor="#E33030" 
+                                    Margin="10"
+                                    CornerRadius="15"/>
+                            <Button WidthRequest="160" 
+                                    BackgroundColor="#779FF2" 
+                                    Margin="10"
+                                    CornerRadius="15"/>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+
+        <!--GridLowerPanel Pole-->
+        <Frame Grid.Row="3"/>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" Margin="5"
+                    x:Name="ButtonHome"
+                    ImageSource="home.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonHome_Clicked"/>
+            <Button Grid.Column="3" Margin="5"
+                    x:Name="ButtonAdd"
+                    ImageSource="add.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonAdd_Clicked"/>
+            <Button Grid.Column="5" Margin="5" 
+                    x:Name="ButtonCalendar"
+                    ImageSource="calendar_1.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonCalendar_Clicked"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

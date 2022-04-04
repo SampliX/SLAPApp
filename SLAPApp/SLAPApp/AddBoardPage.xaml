@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SLAPApp.AddBoardPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="0"/>
+        <Grid Grid.Row="0" x:Name="GridServiceBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    x:Name="ButtonBackToMain"
+                    Margin="5" 
+                    ImageSource="left.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonBackToMain_Clicked"/>
+
+            <Label Grid.Column="1" Text="Создать доску" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontSize="20"/>
+        </Grid>
+    </Grid>
+</ContentPage>
