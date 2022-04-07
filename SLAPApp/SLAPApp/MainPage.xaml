@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="SLAPApp.MainPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="mainLabelStyle" TargetType="Label">
+            <Style x:Key="buttonStyle" TargetType="Button">
                 <Setter Property="FontFamily" Value="Roboto"/>
-                <Setter Property="FontSize" Value="Large"/>
-                <Setter Property="TextColor" Value="#142453"/>
             </Style>
-            <Style x:Key="mainButtonStyle" TargetType="Button">
+
+            <Style x:Key="LabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="Roboto"/>
-                <Setter Property="FontSize" Value="Large"/>
                 <Setter Property="TextColor" Value="#142453"/>
+                <Setter Property="FontSize" Value="Large"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -50,7 +51,7 @@
         <!--GridUser Pole-->
         <Frame Grid.Row="1"/>
         <Grid Grid.Row="1" x:Name="GridUser">
-            <Label Text="Рано или поздно что-то в корячим" 
+            <Label Text="Рано или поздно что-то вкорячим" 
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"/>
         </Grid>
@@ -67,7 +68,10 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Text="Личные доски" Margin="15,5" FontSize="20"/>
+                    <Label Grid.Row="0" 
+                           Text="Личные доски" 
+                           Margin="15,5"
+                           Style="{StaticResource LabelStyle}"/>
 
                     <ScrollView Grid.Row="1" Orientation="Horizontal">
                         <StackLayout Orientation="Horizontal" 
@@ -75,7 +79,7 @@
                             <Button WidthRequest="160" 
                             BackgroundColor="#E35930" 
                             Margin="10"
-                            CornerRadius="15" Text ="Hallo" />
+                            CornerRadius="15"/>
                             <Button WidthRequest="160" 
                             BackgroundColor="#34E330" 
                             Margin="10"
@@ -99,7 +103,10 @@
                         </StackLayout>
                     </ScrollView>
 
-                    <Label Grid.Row="2" Text="Групповые доски" Margin="15,5" FontSize="20"/>
+                    <Label Grid.Row="2" 
+                           Text="Групповые доски" 
+                           Margin="15,5"
+                           Style="{StaticResource LabelStyle}"/>
 
                     <ScrollView Grid.Row="3" Orientation="Horizontal">
                         <StackLayout Orientation="Horizontal" 

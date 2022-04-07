@@ -10,6 +10,7 @@ namespace SLAPApp
 {
     public partial class MainPage : ContentPage
     {
+
         public MainPage()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace SLAPApp
 
         private void ButtonCalendar_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushModalAsync(new CalendarPage());
         }
     }
 }
