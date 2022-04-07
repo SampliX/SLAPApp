@@ -2,6 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SLAPApp.AddBoardPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="mainLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="TextColor" Value="#142453"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+            <Style x:Key="mainButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="TextColor" Value="#142453"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -28,9 +45,7 @@
                     Clicked="ButtonBackToMain_Clicked"/>
 
             <Label Grid.Column="1" Text="Создать доску" 
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Fill"
-                   FontSize="20"/>
+                   Style="{StaticResource mainLabelStyle}"/>
         </Grid>
     </Grid>
 </ContentPage>
