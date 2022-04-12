@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Android.Support.V7.App;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -7,7 +8,7 @@ using Android.OS;
 
 namespace SLAPApp.Droid
 {
-    [Activity(Label = "SLAPApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
+    [Activity(Label = "SLAPApp", MainLauncher = false)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

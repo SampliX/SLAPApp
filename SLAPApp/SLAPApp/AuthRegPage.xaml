@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SLAPApp.AuthRegPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="Roboto"/>
+            </Style>
+
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="TextColor" Value="#142453"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="StartPageGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="130"/>
+                <RowDefinition/>
+                <RowDefinition Height="200"/>
+                <RowDefinition/>
+                <RowDefinition Height="68"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="68"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="1"
+               Text="Работай     с друзьями и с нами!"
+               FontSize="36"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               WidthRequest="200"
+               HorizontalOptions="Center"
+               FontFamily="Roboto"
+               TextColor="#142453"
+               />
+
+            <Image Grid.Row="3"
+               Source="highFiveWithoutText.png"/>
+
+            <Button x:Name="StartRegistrationButton"
+                WidthRequest="286"
+                HorizontalOptions="Center"
+                Text="Начать"
+                TextTransform="None"
+                FontFamily="Roboto"
+                TextColor="White"
+                BackgroundColor="#142453"
+                Grid.Row="5"
+                CornerRadius="10"
+                FontSize="24"
+                    Clicked="StartRegistrationButton_Clicked"/>
+
+            <Button x:Name="StartAutentificationButton"
+                WidthRequest="286"
+                HorizontalOptions="Center"
+                Text="Я уже смешарик"
+                TextTransform="None"
+                FontSize="24"
+                FontFamily="Roboto"
+                TextColor="#142453"
+                BackgroundColor="Transparent"
+                Grid.Row="7"
+                CornerRadius="10"
+                BorderColor="#142453"
+                BorderWidth="5"
+                    Clicked="StartAutentificationButton_Clicked"/>
+        </Grid>
+
+        <Grid x:Name="RegGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="42"/>
+                <RowDefinition/>
+                <RowDefinition Height="135"/>
+                <RowDefinition/>
+                <RowDefinition Height="68"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <Label Style="{StaticResource LabelStyle}"
+                   Text="Регистрация"
+                   HorizontalTextAlignment="Center"
+                   FontSize="36"
+                   Grid.Row="1"/>
+
+            <Grid HorizontalOptions="Center" Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="257"/>
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="RegEmailEntry"
+                           Grid.Row="0"
+                           Placeholder="e-mail"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           ClearButtonVisibility="WhileEditing"
+                           IsSpellCheckEnabled="False"/>
+                <Entry x:Name="RegPasswordEntry"
+                           Grid.Row="2"
+                           Placeholder="Пароль"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           IsPassword="True"/>
+                <Entry x:Name="RegPasswordCopyEntry"
+                           Grid.Row="4"
+                           Placeholder="Еще раз пароль"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           IsPassword="True"/>
+            </Grid>
+
+            <Button x:Name="RegisterAccountButton"
+                        WidthRequest="286"
+                        HorizontalOptions="Center"
+                        Text="Войти"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="White"
+                        BackgroundColor="#142453"
+                        Grid.Row="5"
+                        CornerRadius="10"
+                        FontSize="24"/>
+
+            <Button x:Name="EnterAccountButton"
+                        WidthRequest="210"
+                        HorizontalOptions="Center"
+                        Text="У меня есть аккаунт"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        Grid.Row="7"
+                        CornerRadius="10"
+                        FontSize="18"/>
+        </Grid>
+
+        <Grid x:Name="AuthGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="42"/>
+                <RowDefinition/>
+                <RowDefinition Height="135"/>
+                <RowDefinition/>
+                <RowDefinition Height="68"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <Label Style="{StaticResource LabelStyle}"
+                   Text="Вход"
+                   HorizontalTextAlignment="Center"
+                   FontSize="36"
+                   Grid.Row="1"/>
+
+            <Grid HorizontalOptions="Center" Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="257"/>
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="AuthEmailEntry"
+                           Grid.Row="0"
+                           Placeholder="e-mail"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           ClearButtonVisibility="WhileEditing"
+                           IsSpellCheckEnabled="False"/>
+                <Entry x:Name="AuthPasswordEntry"
+                           Grid.Row="2"
+                           Placeholder="Пароль"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           IsPassword="True"/>
+            </Grid>
+
+            <Button x:Name="LoginAccountButton"
+                        WidthRequest="286"
+                        HorizontalOptions="Center"
+                        Text="Войти"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="White"
+                        BackgroundColor="#142453"
+                        Grid.Row="5"
+                        CornerRadius="10"
+                        FontSize="24"/>
+
+            <Button x:Name="ForgotPassowordButton"
+                        WidthRequest="210"
+                        HorizontalOptions="Center"
+                        Text="Не помню пароль"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        Grid.Row="7"
+                        CornerRadius="10"
+                        FontSize="18"/>
+        </Grid>
+    </Grid>
+</ContentPage>
