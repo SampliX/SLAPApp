@@ -47,5 +47,7 @@
             <Label Grid.Column="1" Text="Создать доску" 
                    Style="{StaticResource mainLabelStyle}"/>
         </Grid>
+        
+        
     </Grid>
 </ContentPage>

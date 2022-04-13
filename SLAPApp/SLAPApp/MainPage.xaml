@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="SLAPApp.MainPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -18,147 +17,411 @@
     </ContentPage.Resources>
     
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="75"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
-
-        <!--GridServiceBar Pole-->
-        <Frame Grid.Row="0"/>
-        <Grid Grid.Row="0" x:Name="GridServiceBar">
+        <Grid x:Name="MainPanelGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <!--GridServiceBar Pole-->
+            <Frame Grid.Row="0"/>
+            <Grid Grid.Row="0" x:Name="GridServiceBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" 
                     Margin="5" 
                     ImageSource="menu.png" 
                     BackgroundColor="Transparent"/>
-            
-            <Button Grid.Column="2" 
+
+                <Button Grid.Column="2" 
                     Margin="5" 
                     ImageSource="setting.png" 
                     BackgroundColor="Transparent"/>
-        </Grid>
+            </Grid>
 
-        <!--GridUser Pole-->
-        <Frame Grid.Row="1"/>
-        <Grid Grid.Row="1" x:Name="GridUser">
-            <Label Text="Рано или поздно что-то вкорячим" 
+            <!--GridUser Pole-->
+            <Frame Grid.Row="1"/>
+            <Grid Grid.Row="1" x:Name="GridUser">
+                <Label Text="Рано или поздно что-то вкорячим" 
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"/>
-        </Grid>
+            </Grid>
 
-        <!--GridBoardPanel Pole-->
-        <ScrollView Grid.Row="2">
-            <StackLayout>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="190"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="190"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+            <!--GridBoardPanel Pole-->
+            <ScrollView Grid.Row="2">
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="190"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="190"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" 
+                        <Label Grid.Row="0" 
                            Text="Личные доски" 
                            Margin="15,5"
                            Style="{StaticResource LabelStyle}"/>
 
-                    <ScrollView Grid.Row="1" Orientation="Horizontal">
-                        <StackLayout Orientation="Horizontal" 
+                        <ScrollView Grid.Row="1" Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" 
                              HorizontalOptions="FillAndExpand">
-                            <Button WidthRequest="160" 
-                            BackgroundColor="#E35930" 
-                            Margin="10"
-                            CornerRadius="15"/>
-                            <Button WidthRequest="160" 
+                                <Frame WidthRequest="160"
+                                  BackgroundColor="#E35930"
+                                  Margin="10"
+                                  CornerRadius="15"
+                                  Padding="0,-20,0,0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Button Grid.Column="0"
+                                            Grid.Row="0" 
+                                            BackgroundColor="Transparent"
+                                            ImageSource="pencil.png"/>
+                                        <Button Grid.Column="2"
+                                            Grid.Row="0" 
+                                            BackgroundColor="Transparent"
+                                            ImageSource="delete.png"/>
+                                        <Label Text="Др Стасяна"
+                                           x:Name="LabelNameOfBoard"
+                                           Grid.Row="1"
+                                           Grid.ColumnSpan="3"
+                                           TextColor="White"
+                                           FontSize="Large"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="End"
+                                           HorizontalTextAlignment="End"
+                                           Padding="10,10">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding tapGesture}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+                                </Frame>
+                                <Button WidthRequest="160" 
                             BackgroundColor="#34E330" 
                             Margin="10"
                             CornerRadius="15"/>
-                            <Button WidthRequest="160" 
+                                <Button WidthRequest="160" 
                             BackgroundColor="#F67A7A" 
                             Margin="10"
                             CornerRadius="15"/>
-                            <Button WidthRequest="160" 
+                                <Button WidthRequest="160" 
                             BackgroundColor="#E35930" 
                             Margin="10"
                             CornerRadius="15"/>
-                            <Button WidthRequest="160" 
+                                <Button WidthRequest="160" 
                             BackgroundColor="#FFBB24" 
                             Margin="10"
                             CornerRadius="15"/>
-                            <Button WidthRequest="160" 
+                                <Button WidthRequest="160" 
                             BackgroundColor="#F67A7A" 
                             Margin="10"
                             CornerRadius="15"/>
-                        </StackLayout>
-                    </ScrollView>
+                            </StackLayout>
+                        </ScrollView>
 
-                    <Label Grid.Row="2" 
+                        <Label Grid.Row="2" 
                            Text="Групповые доски" 
                            Margin="15,5"
                            Style="{StaticResource LabelStyle}"/>
 
-                    <ScrollView Grid.Row="3" Orientation="Horizontal">
-                        <StackLayout Orientation="Horizontal" 
+                        <ScrollView Grid.Row="3" Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" 
                              HorizontalOptions="FillAndExpand">
-                            <Button WidthRequest="160" 
+                                <Button WidthRequest="160" 
                                     BackgroundColor="#371969" 
                                     Margin="10"
                                     CornerRadius="15"/>
-                            <Button WidthRequest="160" 
+                                <Button WidthRequest="160" 
                                     BackgroundColor="#E33030" 
                                     Margin="10"
                                     CornerRadius="15"/>
-                            <Button WidthRequest="160" 
+                                <Button WidthRequest="160" 
                                     BackgroundColor="#779FF2" 
                                     Margin="10"
                                     CornerRadius="15"/>
-                        </StackLayout>
-                    </ScrollView>
-                </Grid>
-            </StackLayout>
-        </ScrollView>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
 
-        <!--GridLowerPanel Pole-->
-        <Frame Grid.Row="3"/>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+            <!--GridLowerPanel Pole-->
+            <Frame Grid.Row="3"/>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Margin="5"
+                <Button Grid.Column="1" Margin="5"
                     x:Name="ButtonHome"
                     ImageSource="home.png" 
                     BackgroundColor="Transparent"
                     Clicked="ButtonHome_Clicked"/>
-            <Button Grid.Column="3" Margin="5"
+                <Button Grid.Column="3" Margin="5"
                     x:Name="ButtonAdd"
                     ImageSource="add.png" 
                     BackgroundColor="Transparent"
                     Clicked="ButtonAdd_Clicked"/>
-            <Button Grid.Column="5" Margin="5" 
+                <Button Grid.Column="5" Margin="5" 
                     x:Name="ButtonCalendar"
                     ImageSource="calendar_1.png" 
                     BackgroundColor="Transparent"
                     Clicked="ButtonCalendar_Clicked"/>
+            </Grid>
         </Grid>
 
+        <Grid x:Name="MainRegAuthGrid">
+            <Grid x:Name="StartPageGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="68"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="68"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1"
+               Text="Работай     с друзьями и с нами!"
+               FontSize="36"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               WidthRequest="200"
+               HorizontalOptions="Center"
+               FontFamily="Roboto"
+               TextColor="#142453"
+               />
+
+                <Image Grid.Row="3"
+               Source="highFiveWithoutText.png"/>
+
+                <Button x:Name="StartRegistrationButton"
+                WidthRequest="286"
+                HorizontalOptions="Center"
+                Text="Начать"
+                TextTransform="None"
+                FontFamily="Roboto"
+                TextColor="White"
+                BackgroundColor="#142453"
+                Grid.Row="5"
+                CornerRadius="10"
+                FontSize="24"
+                    Clicked="StartRegistrationButton_Clicked"/>
+
+                <Button x:Name="StartAutentificationButton"
+                WidthRequest="286"
+                HorizontalOptions="Center"
+                Text="Я уже смешарик"
+                TextTransform="None"
+                FontSize="24"
+                FontFamily="Roboto"
+                TextColor="#142453"
+                BackgroundColor="Transparent"
+                Grid.Row="7"
+                CornerRadius="10"
+                BorderColor="#142453"
+                BorderWidth="5"
+                    Clicked="StartAutentificationButton_Clicked"/>
+            </Grid>
+
+            <Grid x:Name="RegGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="135"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="68"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+
+                <Label Style="{StaticResource LabelStyle}"
+                   Text="Регистрация"
+                   HorizontalTextAlignment="Center"
+                   FontSize="36"
+                   Grid.Row="1"/>
+
+                <Grid HorizontalOptions="Center" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="257"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry x:Name="RegEmailEntry"
+                           Grid.Row="0"
+                           Placeholder="e-mail"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           ClearButtonVisibility="WhileEditing"
+                           IsSpellCheckEnabled="False"/>
+                    <Entry x:Name="RegPasswordEntry"
+                           Grid.Row="2"
+                           Placeholder="Пароль"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           IsPassword="True"/>
+                    <Entry x:Name="RegPasswordCopyEntry"
+                           Grid.Row="4"
+                           Placeholder="Еще раз пароль"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           IsPassword="True"/>
+                </Grid>
+
+                <Button x:Name="RegisterAccountButton"
+                        WidthRequest="286"
+                        HorizontalOptions="Center"
+                        Text="Войти"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="White"
+                        BackgroundColor="#142453"
+                        Grid.Row="5"
+                        CornerRadius="10"
+                        FontSize="24"
+                        Clicked="RegisterAccountButton_Clicked"/>
+
+                <Button x:Name="EnterAccountButton"
+                        WidthRequest="210"
+                        HorizontalOptions="Center"
+                        Text="У меня есть аккаунт"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        Grid.Row="7"
+                        CornerRadius="10"
+                        FontSize="18"
+                        Clicked="EnterAccountButton_Clicked"/>
+            </Grid>
+
+            <Grid x:Name="AuthGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="135"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="68"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+
+                <Label Style="{StaticResource LabelStyle}"
+                   Text="Вход"
+                   HorizontalTextAlignment="Center"
+                   FontSize="36"
+                   Grid.Row="1"/>
+
+                <Grid HorizontalOptions="Center" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="257"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry x:Name="AuthEmailEntry"
+                           Grid.Row="0"
+                           Placeholder="e-mail"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           ClearButtonVisibility="WhileEditing"
+                           IsSpellCheckEnabled="False"/>
+                    <Entry x:Name="AuthPasswordEntry"
+                           Grid.Row="2"
+                           Placeholder="Пароль"
+                           FontSize="24"
+                           TextColor="#142453"
+                           FontFamily="Roboto"
+                           IsPassword="True"/>
+                    <Switch x:Name="SwitchKeepLoggedMe"
+                            Grid.Row="4"
+                            HorizontalOptions="Start"/>
+                    <Label Grid.Row="4"
+                           FontSize="24"
+                           Padding="4"
+                           Text="Запомнить меня   "
+                           TextColor="#142453"
+                           HorizontalOptions="End"
+                           />
+                </Grid>
+
+                <Button x:Name="LoginAccountButton"
+                        WidthRequest="286"
+                        HorizontalOptions="Center"
+                        Text="Войти"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="White"
+                        BackgroundColor="#142453"
+                        Grid.Row="5"
+                        CornerRadius="10"
+                        FontSize="24"
+                        Clicked="LoginAccountButton_Clicked"/>
+
+                <Button x:Name="ForgotPassowordButton"
+                        WidthRequest="210"
+                        HorizontalOptions="Center"
+                        Text="Не помню пароль"
+                        TextTransform="None"
+                        FontFamily="Roboto"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        Grid.Row="7"
+                        CornerRadius="10"
+                        FontSize="18"
+                        Clicked="ForgotPassowordButton_Clicked"/>
+            </Grid>
+        </Grid>
     </Grid>
 
+    
 </ContentPage>
