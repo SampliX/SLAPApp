@@ -12,12 +12,19 @@ namespace SLAPApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalendarPage : ContentPage
     {
+        /// <summary>
+        /// Конструктор класса отвечающий за инициализацию страницы с календарем
+        /// </summary>
         public CalendarPage()
         {
             InitializeComponent();
         }
-
-        private void ButtonBackToMain_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Метод отвечающий за нажатие кнопки вернуться в главное меню
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        public void ButtonBackToMain_Clicked(object sender, EventArgs e)
         {
             Navigation.PopModalAsync();
         }

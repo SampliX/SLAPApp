@@ -8,7 +8,7 @@ using System.IO;
 
 namespace SLAPApp
 {
-    internal class WebClientClass
+    public class WebClientClass
     {
         private UserClass User = new UserClass();
 
@@ -21,15 +21,22 @@ namespace SLAPApp
 
             return User;
         }
-
-        private void AsyncGetUserData(string email)
+        /// <summary>
+        /// Метод отвечающий за асинхронную загрузку данных пользователя
+        /// </summary>
+        /// <param name="email">Параметр, отвечающий за почту пользователя</param>
+        protected void GetUserDataAsync(string email)
         {
             //string jsonUserLine = await Task.Run(() => );
 
             //User = JsonConvert.DeserializeObject<UserClass>(jsonUserLine);
         }
-
-        private string getData(string url)
+        /// <summary>
+        /// Метод отвечающий за загрузку данных с сервера
+        /// </summary>
+        /// <param name="url">Параметр, отвечающий за адрес сервера</param>
+        /// <returns>Возвращает строку в формате json</returns>
+        protected string getData(string url)
         {
             WebClient wc = new WebClient();
             wc.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.119 YaBrowser/22.3.0.2430 Yowser/2.5 Safari/537.36");
@@ -41,7 +48,11 @@ namespace SLAPApp
 
             return line;
         }
-
+        /// <summary>
+        /// Метод отвечающий за формирование json для отправки на сервер
+        /// </summary>
+        /// <param name="email">Параметр, отвечающий за почту пользователя</param>
+        /// <param name="password">Параметр, отвечающий за пароль пользователя</param>
         public void postRegUserData(string email, string password)
         {
             RegUserClass regUserClass = new RegUserClass();
@@ -51,8 +62,12 @@ namespace SLAPApp
             string json = JsonConvert.SerializeObject(regUserClass);
             postData(json);
         }
-
-        private void postData(string json, string url = "http://194.87.99.112:8080/users")
+        /// <summary>
+        /// Метод отвечающий за отправку json файла на сервер
+        /// </summary>
+        /// <param name="json">Параметр, отвечающий за отформатированную по стандарту json строку</param>
+        /// <param name="url">Параметр, отвечающий за адрес сервера</param>
+        protected void postData(string json, string url = "http://194.87.99.112:8080/users")
         {
             WebClient wc = new WebClient();
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
