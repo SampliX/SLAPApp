@@ -560,12 +560,13 @@
                                      x:Name="columnsStackLayout">
                             <Grid WidthRequest="40"/>
                             <Frame BackgroundColor="White"
-                               CornerRadius="10"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               HasShadow="True"
-                               WidthRequest="290"
-                               BorderColor="Gray">
+                                   x:Name="Column1"
+                                   CornerRadius="10"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HasShadow="True"
+                                   WidthRequest="290"
+                                   BorderColor="Gray">
                                 <StackLayout>
                                     <StackLayout>
                                         <Frame BackgroundColor="#E35930"
@@ -583,14 +584,13 @@
                                                 <Frame HeightRequest="40"
                                                    HasShadow="True"
                                                    BorderColor="Gray">
-                                                    <Button
-                                                TextColor="#142453"
-                                           Text="dfjbdh"
-                                           FontSize="22"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center"
-                                                Margin="-20"
-                                                BackgroundColor="Transparent"/>
+                                                    <Button TextColor="#142453"
+                                                            Text="Task"
+                                                            FontSize="22"
+                                                            HorizontalOptions="Start"
+                                                            VerticalOptions="Center"
+                                                            Margin="-20"
+                                                            BackgroundColor="Transparent"/>
                                                 </Frame>
                                             </StackLayout>
                                         </ScrollView>
@@ -603,7 +603,6 @@
                                             HorizontalOptions="Center"/>
                                 </StackLayout>
                             </Frame>
-
                             <Grid WidthRequest="40"/>
                             <Frame BackgroundColor="White"
                                CornerRadius="10"
