@@ -8,11 +8,11 @@ using System.IO;
 
 namespace SLAPApp
 {
-    internal class WebClientClass
+    public class WebClientClass
     {
         private UserClass User = new UserClass();
 
-        internal UserClass getUserData(string email)
+        public UserClass GetUserData(string email)
         {
             //AsyncGetUserData(email);
             string jsonUserLine = getData("http://194.87.99.112:8080/users?email=" + email);
@@ -21,8 +21,22 @@ namespace SLAPApp
 
             return User;
         }
+        /// <summary>
+        /// Метод отвечающий за асинхронную загрузку данных пользователя
+        /// </summary>
+        /// <param name="email">Параметр, отвечающий за почту пользователя</param>
+        protected void GetUserDataAsync(string email)
+        {
+            //string jsonUserLine = await Task.Run(() => );
 
-        private string getData(string url)
+            //User = JsonConvert.DeserializeObject<UserClass>(jsonUserLine);
+        }
+        /// <summary>
+        /// Метод отвечающий за загрузку данных с сервера
+        /// </summary>
+        /// <param name="url">Параметр, отвечающий за адрес сервера</param>
+        /// <returns>Возвращает строку в формате json</returns>
+        public string getData(string url)
         {
             WebClient wc = new WebClient();
             wc.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.119 YaBrowser/22.3.0.2430 Yowser/2.5 Safari/537.36");
@@ -34,8 +48,12 @@ namespace SLAPApp
 
             return line;
         }
-
-        public string postRegUserData(string email, string password)
+        /// <summary>
+        /// Метод отвечающий за формирование json для отправки на сервер
+        /// </summary>
+        /// <param name="email">Параметр, отвечающий за почту пользователя</param>
+        /// <param name="password">Параметр, отвечающий за пароль пользователя</param>
+        public void postRegUserData(string email, string password)
         {
             RegUserClass regUserClass = new RegUserClass();
             regUserClass.email = email;
@@ -44,8 +62,12 @@ namespace SLAPApp
             string json = JsonConvert.SerializeObject(regUserClass);
             return postData(json, "http://194.87.99.112:8080/users");
         }
-
-        private string postData(string json, string url)
+        /// <summary>
+        /// Метод отвечающий за отправку json файла на сервер
+        /// </summary>
+        /// <param name="json">Параметр, отвечающий за отформатированную по стандарту json строку</param>
+        /// <param name="url">Параметр, отвечающий за адрес сервера</param>
+        protected void postData(string json, string url = "http://194.87.99.112:8080/users")
         {
             WebClient wc = new WebClient();
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
@@ -53,7 +75,7 @@ namespace SLAPApp
         }
     }
 
-    internal class UserClass
+    public class UserClass
     {
         public int user_id { get; set; }
         public string email { get; set; }
@@ -61,7 +83,7 @@ namespace SLAPApp
         public string hash_pass { get; set; }
     }
 
-    internal class RegUserClass
+    public class RegUserClass
     {
         public string email { get; set; }
         public string name { get; set; }

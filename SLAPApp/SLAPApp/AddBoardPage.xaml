@@ -2,32 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SLAPApp.AddBoardPage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="mainLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="Roboto"/>
-                <Setter Property="FontSize" Value="Large"/>
-                <Setter Property="TextColor" Value="#142453"/>
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-            </Style>
-            <Style x:Key="mainButtonStyle" TargetType="Button">
-                <Setter Property="FontFamily" Value="Roboto"/>
-                <Setter Property="FontSize" Value="Large"/>
-                <Setter Property="TextColor" Value="#142453"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <Grid x:Name="AddBoardPageGrid"
+          IsVisible="false">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="75"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="320"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="96"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <Frame Grid.Row="0"/>
@@ -44,10 +26,133 @@
                     BackgroundColor="Transparent"
                     Clicked="ButtonBackToMain_Clicked"/>
 
-            <Label Grid.Column="1" Text="Создать доску" 
-                   Style="{StaticResource mainLabelStyle}"/>
+            <Label Grid.Column="1" Text="Изменить доску" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontFamily="Roboto"
+                   TextColor="#142453"
+                   FontSize="24"/>
         </Grid>
-        
-        
+        <Frame Grid.Row="1"
+               x:Name="deskFrame"
+               BackgroundColor="#E35930"
+               CornerRadius="20" 
+               Margin="75, 30, 75, 3">
+            <Editor HorizontalOptions="End"
+                   VerticalOptions="End"
+                   x:Name="deskName"
+                   Text="Дом"
+                   FontFamily="Roboto"
+                   FontSize="42"
+                   TextColor="White"/>
+        </Frame>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="255"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="groupCheckBox"
+                      Color="#142453"
+                      Grid.Column="1"
+                      HorizontalOptions="End"
+                      VerticalOptions="Center"/>
+            <Label Text="Групповая доска"
+                   FontFamily="Roboto"
+                   FontSize="20"
+                   TextColor="#142453"
+                   Grid.Column="2"
+                   VerticalOptions="Center"/>
+        </Grid>
+        <Grid x:Name="selectColorsGrid" 
+              Grid.Row="3"
+              HorizontalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="13"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="13"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="13"/>
+                <ColumnDefinition Width="48"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48"/>
+                <RowDefinition Height="48"/>
+            </Grid.RowDefinitions>
+            <Button CornerRadius="10"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    x:Name="OrangeColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#E35930"/>
+            <Button CornerRadius="10"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    x:Name="BlueColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#1878D0"/>
+            <Button CornerRadius="10"
+                    Grid.Column="4"
+                    Grid.Row="0"
+                    x:Name="YellowColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#FFBB24"/>
+            <Button CornerRadius="10"
+                    Grid.Column="6"
+                    Grid.Row="0"
+                    x:Name="GreenColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#34E330"/>
+
+            <Button CornerRadius="10"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    x:Name="PurpleColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#371969"/>
+            <Button CornerRadius="10"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    x:Name="RedColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#E33030"/>
+            <Button CornerRadius="10"
+                    Grid.Column="4"
+                    Grid.Row="1"
+                    x:Name="PinkColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#F67A7A"/>
+            <Button CornerRadius="10"
+                    Grid.Column="6"
+                    Grid.Row="1"
+                    x:Name="CyanColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#779FF2"/>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="68"/>
+                <RowDefinition Height="16"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="saveChangesButton"
+                    Grid.Row="1"
+                WidthRequest="286"
+                HorizontalOptions="Center"
+                Text="Сохранить"
+                TextTransform="None"
+                FontSize="24"
+                FontFamily="Roboto"
+                TextColor="#142453"
+                BackgroundColor="Transparent"
+                CornerRadius="10"
+                BorderColor="#142453"
+                BorderWidth="5"
+                    Clicked="saveChangesButton_Clicked"/>
+        </Grid>
+
+
     </Grid>
 </ContentPage>
