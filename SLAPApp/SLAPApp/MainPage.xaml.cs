@@ -428,6 +428,11 @@ namespace SLAPApp
             deskFrame.BackgroundColor = tmpButton.BackgroundColor;
             deskEditorFrame.BackgroundColor = tmpButton.BackgroundColor;
         }
+
+        private void addTask3Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class Board

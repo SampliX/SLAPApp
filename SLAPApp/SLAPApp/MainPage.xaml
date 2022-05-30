@@ -566,24 +566,25 @@
                                    VerticalOptions="Center"
                                    HasShadow="True"
                                    WidthRequest="290"
-                                   BorderColor="Gray">
+                                   BorderColor="Gray"
+                                   IsVisible = "true">
                                 <StackLayout>
                                     <StackLayout>
                                         <Frame BackgroundColor="#E35930"
-                                       HeightRequest="40"
-                                       Margin="-20">
-                                            <Label TextColor="White"
-                                           Text="dfjbdh"
-                                           FontSize="Large"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center"/>
+                                               HeightRequest="40"
+                                               Margin="-20">
+                                            <Editor TextColor="White"
+                                                   Text="dfjbdh"
+                                                   FontSize="22"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="Center"/>
                                         </Frame>
                                         <Grid HeightRequest="20"/>
                                         <ScrollView Orientation="Vertical">
-                                            <StackLayout x:Name="columnStackLayout">
+                                            <StackLayout x:Name="column1StackLayout">
                                                 <Frame HeightRequest="40"
-                                                   HasShadow="True"
-                                                   BorderColor="Gray">
+                                                       HasShadow="True"
+                                                       BorderColor="Gray">
                                                     <Button TextColor="#142453"
                                                             Text="Task"
                                                             FontSize="22"
@@ -603,62 +604,41 @@
                                             HorizontalOptions="Center"/>
                                 </StackLayout>
                             </Frame>
-                            <Grid WidthRequest="40"/>
+                            <Grid WidthRequest="40"
+                                  x:Name ="grid2"/>
                             <Frame BackgroundColor="White"
-                               CornerRadius="10"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               HasShadow="True"
-                               WidthRequest="290"
-                               BorderColor="Gray">
+                                   x:Name="Column2"
+                                   CornerRadius="10"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HasShadow="True"
+                                   WidthRequest="290"
+                                   BorderColor="Gray"
+                                   IsVisible = "false">
                                 <StackLayout>
                                     <StackLayout>
                                         <Frame BackgroundColor="#E35930"
-                                       HeightRequest="40"
-                                       Margin="-20">
-                                            <Label TextColor="White"
-                                           Text="dfjbdh"
-                                           FontSize="Large"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center"/>
+                                               HeightRequest="40"
+                                               Margin="-20">
+                                            <Editor TextColor="White"
+                                                   Text="dfjbdh"
+                                                   FontSize="22"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="Center"/>
                                         </Frame>
                                         <Grid HeightRequest="20"/>
-                                        <ScrollView Orientation="Vertical"
-                                                    x:Name="columnsTasksScrollView2">
-                                            <StackLayout>
+                                        <ScrollView Orientation="Vertical">
+                                            <StackLayout x:Name="column2StackLayout">
                                                 <Frame HeightRequest="40"
-                                                   HasShadow="True"
-                                                   BorderColor="Gray">
-                                                    <Button
-                                                TextColor="#142453"
-                                           Text="dfjbdh"
-                                           FontSize="22"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center"
-                                                Margin="-20"
-                                                BackgroundColor="Transparent"/>
-                                                </Frame>
-                                                <Frame HeightRequest="40"
-                                       HasShadow="True" BorderColor="Gray">
-                                                    <Button
-                                                TextColor="#142453"
-                                           Text="dfjbdh"
-                                           FontSize="Large"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center"
-                                                Margin="-20"
-                                                BackgroundColor="Transparent"/>
-                                                </Frame>
-                                                <Frame HeightRequest="40"
-                                       HasShadow="True" BorderColor="Gray">
-                                                    <Button
-                                                TextColor="#142453"
-                                                Margin="-20"
-                                                BackgroundColor="Transparent"
-                                           Text="dfjbdh"
-                                           FontSize="Large"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center"/>
+                                                       HasShadow="True"
+                                                       BorderColor="Gray">
+                                                    <Button TextColor="#142453"
+                                                            Text="Task"
+                                                            FontSize="22"
+                                                            HorizontalOptions="Start"
+                                                            VerticalOptions="Center"
+                                                            Margin="-20"
+                                                            BackgroundColor="Transparent"/>
                                                 </Frame>
                                             </StackLayout>
                                         </ScrollView>
@@ -671,7 +651,55 @@
                                             HorizontalOptions="Center"/>
                                 </StackLayout>
                             </Frame>
-                            <Grid WidthRequest="40"/>
+                            <Grid WidthRequest="40"
+                                  x:Name ="grid3"/>
+                            <Frame BackgroundColor="White"
+                                   x:Name="Column3"
+                                   CornerRadius="10"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HasShadow="True"
+                                   WidthRequest="290"
+                                   BorderColor="Gray"
+                                   IsVisible = "true">
+                                <StackLayout>
+                                    <StackLayout>
+                                        <Frame BackgroundColor="#E35930"
+                                               HeightRequest="40"
+                                               Margin="-20">
+                                            <Editor TextColor="White"
+                                                   Text="dfjbdh"
+                                                   FontSize="22"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="Center"/>
+                                        </Frame>
+                                        <Grid HeightRequest="20"/>
+                                        <ScrollView Orientation="Vertical">
+                                            <StackLayout x:Name="column3StackLayout">
+                                                <Frame HeightRequest="40"
+                                                       HasShadow="True"
+                                                       BorderColor="Gray">
+                                                    <Button TextColor="#142453"
+                                                            Text="Task"
+                                                            FontSize="22"
+                                                            HorizontalOptions="Start"
+                                                            VerticalOptions="Center"
+                                                            Margin="-20"
+                                                            BackgroundColor="Transparent"/>
+                                                </Frame>
+                                            </StackLayout>
+                                        </ScrollView>
+                                    </StackLayout>
+                                    <Button Text="+"
+                                            x:Name="addTask3Button"
+                                            Clicked="addTask3Button_Clicked"
+                                            TextColor="#142453"
+                                            FontSize="44"
+                                            FontFamily="Roboto"
+                                            BackgroundColor="Transparent"
+                                            HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
