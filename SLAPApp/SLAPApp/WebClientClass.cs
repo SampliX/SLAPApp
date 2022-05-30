@@ -22,13 +22,6 @@ namespace SLAPApp
             return User;
         }
 
-        private void AsyncGetUserData(string email)
-        {
-            //string jsonUserLine = await Task.Run(() => );
-
-            //User = JsonConvert.DeserializeObject<UserClass>(jsonUserLine);
-        }
-
         private string getData(string url)
         {
             WebClient wc = new WebClient();
@@ -42,21 +35,21 @@ namespace SLAPApp
             return line;
         }
 
-        public void postRegUserData(string email, string password)
+        public string postRegUserData(string email, string password)
         {
             RegUserClass regUserClass = new RegUserClass();
             regUserClass.email = email;
             regUserClass.hashPass = password;
             regUserClass.name = "User" + new Random().Next(100000,1000000).ToString();
             string json = JsonConvert.SerializeObject(regUserClass);
-            postData(json);
+            return postData(json, "http://194.87.99.112:8080/users");
         }
 
-        private void postData(string json, string url = "http://194.87.99.112:8080/users")
+        private string postData(string json, string url)
         {
             WebClient wc = new WebClient();
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-            string response = wc.UploadString(url, json);
+            return wc.UploadString(url, json);
         }
     }
 

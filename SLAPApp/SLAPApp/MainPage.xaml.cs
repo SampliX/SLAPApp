@@ -70,7 +70,7 @@ namespace SLAPApp
                 try
                 {
                     User = clientClass.getUserData(email.ToString());
-                    if (User.hash_pass == /*CreateMD5(App.Current.Properties["password"].ToString())*/ App.Current.Properties["password"].ToString())
+                    if (User.hash_pass == App.Current.Properties["password"].ToString())
                     {
                         MainRegAuthGrid.IsVisible = false;
                         MainPanelGrid.IsVisible = true;
@@ -127,7 +127,7 @@ namespace SLAPApp
                 try
                 {
                     User = clientClass.getUserData(AuthEmailEntry.Text);
-                    if (User.hash_pass == /*CreateMD5(App.Current.Properties["password"].ToString())*/ AuthPasswordEntry.Text)
+                    if (User.hash_pass == CreateMD5(AuthPasswordEntry.Text))
                     {
                         if(SwitchKeepLoggedMe.IsToggled == true)
                         {
@@ -182,9 +182,9 @@ namespace SLAPApp
                     DisplayAlert("Ошибка", "Поля не заполнены", "Ок");
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                DisplayAlert("Ошибка", "Произошла непредвиденная ошибка, повторите попытку снова", "Ок");
+                DisplayAlert("Ошибка", ex.ToString(), "Ок");
             }
         }
     }
