@@ -12,7 +12,7 @@ namespace SLAPApp
     {
         private UserClass User = new UserClass();
 
-        internal UserClass getUserData(string email)
+        public UserClass GetUserData(string email)
         {
             //AsyncGetUserData(email);
             string jsonUserLine = getData("http://194.87.99.112:8080/users?email=" + email);
@@ -36,7 +36,7 @@ namespace SLAPApp
         /// </summary>
         /// <param name="url">Параметр, отвечающий за адрес сервера</param>
         /// <returns>Возвращает строку в формате json</returns>
-        protected string getData(string url)
+        public string getData(string url)
         {
             WebClient wc = new WebClient();
             wc.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.119 YaBrowser/22.3.0.2430 Yowser/2.5 Safari/537.36");
@@ -75,7 +75,7 @@ namespace SLAPApp
         }
     }
 
-    internal class UserClass
+    public class UserClass
     {
         public int user_id { get; set; }
         public string email { get; set; }
@@ -83,7 +83,7 @@ namespace SLAPApp
         public string hash_pass { get; set; }
     }
 
-    internal class RegUserClass
+    public class RegUserClass
     {
         public string email { get; set; }
         public string name { get; set; }

@@ -15,7 +15,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <Grid>
         <Grid x:Name="MainPanelGrid">
             <Grid.ColumnDefinitions>
@@ -28,9 +28,28 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
+            <Frame WidthRequest="160"
+                   BackgroundColor="#E35930"
+                   Margin="10"
+                   CornerRadius="15"
+                   Padding="0,-20,0,0"
+                   x:Name="deskFrame"
+                   IsVisible="false">
+                <Grid>
+                    <Label Text=""
+                           x:Name="deskFrameLabelNameOfBoard"
+                           TextColor="White"
+                           FontSize="Large"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           HorizontalTextAlignment="End"
+                           Padding="20,20"/>
+                </Grid>
+            </Frame>
+
             <!--GridServiceBar Pole-->
             <Frame Grid.Row="0"/>
-            <Grid Grid.Row="0" x:Name="GridServiceBar">
+            <Grid Grid.Row="0" x:Name="GridMainServiceBar">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
@@ -75,66 +94,9 @@
 
                         <ScrollView Grid.Row="1" Orientation="Horizontal">
                             <StackLayout Orientation="Horizontal" 
-                             HorizontalOptions="FillAndExpand">
-                                <Frame WidthRequest="160"
-                                  BackgroundColor="#E35930"
-                                  Margin="10"
-                                  CornerRadius="15"
-                                  Padding="0,-20,0,0">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Button Grid.Column="0"
-                                            Grid.Row="0" 
-                                            BackgroundColor="Transparent"
-                                            ImageSource="pencil.png"/>
-                                        <Button Grid.Column="2"
-                                            Grid.Row="0" 
-                                            BackgroundColor="Transparent"
-                                            ImageSource="delete.png"/>
-                                        <Label Text="Др Стасяна"
-                                           x:Name="LabelNameOfBoard"
-                                           Grid.Row="1"
-                                           Grid.ColumnSpan="3"
-                                           TextColor="White"
-                                           FontSize="Large"
-                                           HorizontalOptions="End"
-                                           VerticalOptions="End"
-                                           HorizontalTextAlignment="End"
-                                           Padding="10,10">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding tapGesture}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </Grid>
-                                </Frame>
-                                <Button WidthRequest="160" 
-                            BackgroundColor="#34E330" 
-                            Margin="10"
-                            CornerRadius="15"/>
-                                <Button WidthRequest="160" 
-                            BackgroundColor="#F67A7A" 
-                            Margin="10"
-                            CornerRadius="15"/>
-                                <Button WidthRequest="160" 
-                            BackgroundColor="#E35930" 
-                            Margin="10"
-                            CornerRadius="15"/>
-                                <Button WidthRequest="160" 
-                            BackgroundColor="#FFBB24" 
-                            Margin="10"
-                            CornerRadius="15"/>
-                                <Button WidthRequest="160" 
-                            BackgroundColor="#F67A7A" 
-                            Margin="10"
-                            CornerRadius="15"/>
+                             HorizontalOptions="FillAndExpand"
+                                         x:Name="PersonalDescs">
+                                
                             </StackLayout>
                         </ScrollView>
 
@@ -145,19 +107,8 @@
 
                         <ScrollView Grid.Row="3" Orientation="Horizontal">
                             <StackLayout Orientation="Horizontal" 
-                             HorizontalOptions="FillAndExpand">
-                                <Button WidthRequest="160" 
-                                    BackgroundColor="#371969" 
-                                    Margin="10"
-                                    CornerRadius="15"/>
-                                <Button WidthRequest="160" 
-                                    BackgroundColor="#E33030" 
-                                    Margin="10"
-                                    CornerRadius="15"/>
-                                <Button WidthRequest="160" 
-                                    BackgroundColor="#779FF2" 
-                                    Margin="10"
-                                    CornerRadius="15"/>
+                             HorizontalOptions="FillAndExpand"
+                                         x:Name="GroupDescs">
                             </StackLayout>
                         </ScrollView>
                     </Grid>
@@ -421,7 +372,342 @@
                         Clicked="ForgotPassowordButton_Clicked"/>
             </Grid>
         </Grid>
+
+        <Grid x:Name="AddBoardPageGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="320"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="96"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0"/>
+            <Grid Grid.Row="0" x:Name="GridAddBoardServiceBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                    x:Name="ButtonBackToMain"
+                    Margin="5" 
+                    ImageSource="left.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonBackToMain_Clicked"/>
+
+                <Label Grid.Column="1" Text="Изменить доску" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontFamily="Roboto"
+                   TextColor="#142453"
+                   FontSize="24"/>
+            </Grid>
+            <Frame Grid.Row="1"
+               x:Name="deskEditorFrame"
+               BackgroundColor="#E35930"
+               CornerRadius="20" 
+               Margin="75, 30, 75, 3">
+                <Editor HorizontalOptions="End"
+                   VerticalOptions="End"
+                   x:Name="deskNameEditor"
+                   Text="Дом"
+                   FontFamily="Roboto"
+                   FontSize="42"
+                   TextColor="White"/>
+            </Frame>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="255"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="groupCheckBox"
+                      Color="#142453"
+                      Grid.Column="1"
+                      HorizontalOptions="End"
+                      VerticalOptions="Center"/>
+                <Label Text="Групповая доска"
+                   FontFamily="Roboto"
+                   FontSize="20"
+                   TextColor="#142453"
+                   Grid.Column="2"
+                   VerticalOptions="Center"/>
+            </Grid>
+            <Grid x:Name="selectColorsGrid" 
+              Grid.Row="3"
+              HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="13"/>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="13"/>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="13"/>
+                    <ColumnDefinition Width="48"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48"/>
+                    <RowDefinition Height="48"/>
+                </Grid.RowDefinitions>
+                <Button CornerRadius="10"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    x:Name="OrangeColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#E35930"/>
+                <Button CornerRadius="10"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    x:Name="BlueColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#1878D0"/>
+                <Button CornerRadius="10"
+                    Grid.Column="4"
+                    Grid.Row="0"
+                    x:Name="YellowColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#FFBB24"/>
+                <Button CornerRadius="10"
+                    Grid.Column="6"
+                    Grid.Row="0"
+                    x:Name="GreenColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#34E330"/>
+
+                <Button CornerRadius="10"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    x:Name="PurpleColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#371969"/>
+                <Button CornerRadius="10"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    x:Name="RedColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#E33030"/>
+                <Button CornerRadius="10"
+                    Grid.Column="4"
+                    Grid.Row="1"
+                    x:Name="PinkColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#F67A7A"/>
+                <Button CornerRadius="10"
+                    Grid.Column="6"
+                    Grid.Row="1"
+                    x:Name="CyanColorButton"
+                    Clicked="SelectColorButton_Clicked"
+                    BackgroundColor="#779FF2"/>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="16"/>
+                    <RowDefinition Height="68"/>
+                    <RowDefinition Height="16"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="saveChangesButton"
+                    Grid.Row="1"
+                WidthRequest="286"
+                HorizontalOptions="Center"
+                Text="Сохранить"
+                TextTransform="None"
+                FontSize="24"
+                FontFamily="Roboto"
+                TextColor="#142453"
+                BackgroundColor="Transparent"
+                CornerRadius="10"
+                BorderColor="#142453"
+                BorderWidth="5"
+                    Clicked="saveChangesButton_Clicked"/>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="AddColumnPageGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0"/>
+            <Grid Grid.Row="0" x:Name="GridAddColumnServiceBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                    x:Name="ButtonBackToMain2"
+                    Margin="5" 
+                    ImageSource="left.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonBackToMain_Clicked"/>
+
+                <Label Grid.Column="1" Text="Дом" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontFamily="Roboto"
+                   TextColor="#142453"
+                   FontSize="24"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <StackLayout HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                    <ScrollView Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal"
+                                     x:Name="columnsStackLayout">
+                            <Grid WidthRequest="40"/>
+                            <Frame BackgroundColor="White"
+                               CornerRadius="10"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               HasShadow="True"
+                               WidthRequest="290"
+                               BorderColor="Gray">
+                                <StackLayout>
+                                    <StackLayout>
+                                        <Frame BackgroundColor="#E35930"
+                                       HeightRequest="40"
+                                       Margin="-20">
+                                            <Label TextColor="White"
+                                           Text="dfjbdh"
+                                           FontSize="Large"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"/>
+                                        </Frame>
+                                        <Grid HeightRequest="20"/>
+                                        <ScrollView Orientation="Vertical">
+                                            <StackLayout x:Name="columnStackLayout">
+                                                <Frame HeightRequest="40"
+                                                   HasShadow="True"
+                                                   BorderColor="Gray">
+                                                    <Button
+                                                TextColor="#142453"
+                                           Text="dfjbdh"
+                                           FontSize="22"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"
+                                                Margin="-20"
+                                                BackgroundColor="Transparent"/>
+                                                </Frame>
+                                            </StackLayout>
+                                        </ScrollView>
+                                    </StackLayout>
+                                    <Button Text="+"
+                                            TextColor="#142453"
+                                            FontSize="44"
+                                            FontFamily="Roboto"
+                                            BackgroundColor="Transparent"
+                                            HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Grid WidthRequest="40"/>
+                            <Frame BackgroundColor="White"
+                               CornerRadius="10"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               HasShadow="True"
+                               WidthRequest="290"
+                               BorderColor="Gray">
+                                <StackLayout>
+                                    <StackLayout>
+                                        <Frame BackgroundColor="#E35930"
+                                       HeightRequest="40"
+                                       Margin="-20">
+                                            <Label TextColor="White"
+                                           Text="dfjbdh"
+                                           FontSize="Large"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"/>
+                                        </Frame>
+                                        <Grid HeightRequest="20"/>
+                                        <ScrollView Orientation="Vertical"
+                                                    x:Name="columnsTasksScrollView2">
+                                            <StackLayout>
+                                                <Frame HeightRequest="40"
+                                                   HasShadow="True"
+                                                   BorderColor="Gray">
+                                                    <Button
+                                                TextColor="#142453"
+                                           Text="dfjbdh"
+                                           FontSize="22"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"
+                                                Margin="-20"
+                                                BackgroundColor="Transparent"/>
+                                                </Frame>
+                                                <Frame HeightRequest="40"
+                                       HasShadow="True" BorderColor="Gray">
+                                                    <Button
+                                                TextColor="#142453"
+                                           Text="dfjbdh"
+                                           FontSize="Large"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"
+                                                Margin="-20"
+                                                BackgroundColor="Transparent"/>
+                                                </Frame>
+                                                <Frame HeightRequest="40"
+                                       HasShadow="True" BorderColor="Gray">
+                                                    <Button
+                                                TextColor="#142453"
+                                                Margin="-20"
+                                                BackgroundColor="Transparent"
+                                           Text="dfjbdh"
+                                           FontSize="Large"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"/>
+                                                </Frame>
+                                            </StackLayout>
+                                        </ScrollView>
+                                    </StackLayout>
+                                    <Button Text="+"
+                                            TextColor="#142453"
+                                            FontSize="44"
+                                            FontFamily="Roboto"
+                                            BackgroundColor="Transparent"
+                                            HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            <Grid WidthRequest="40"/>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </Grid>
+
+            <Frame Grid.Row="2"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Margin="5"
+                    x:Name="ButtonHome2"
+                    ImageSource="home.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonHome_Clicked"/>
+                <Button Grid.Column="3" Margin="5"
+                    x:Name="ButtonAdd2"
+                    ImageSource="add.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonAdd_Clicked"/>
+                <Button Grid.Column="5" Margin="5" 
+                    x:Name="ButtonCalendar2"
+                    ImageSource="calendar_1.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonCalendar_Clicked"/>
+            </Grid>
+        </Grid>
     </Grid>
 
-    
+
 </ContentPage>

@@ -8,7 +8,7 @@ using Android.OS;
 
 namespace SLAPApp.Droid
 {
-    [Activity(Label = "SLAPApp", MainLauncher = false)]
+    [Activity(Label = "SLAPApp", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
