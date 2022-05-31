@@ -4,18 +4,27 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-
-//[assembly: Xamarin.Forms.Dependency(typeof(Toast_Android))]
 
 namespace SLAPApp
 {
     public partial class MainPage : ContentPage
     {
+        string UserEmail;
+        string UserPassword;
+        string UserName;
+
+        bool happyFlag = false;
+        string NameOfDesk = "";
+
         int condition = 0;
         Button tmpButton = new Button();
         Dictionary<Frame, Board> desksDict = new Dictionary<Frame, Board>();
+
+        Button tmpButtonName = new Button();
+        List<Tasks> tasks = new List<Tasks>();
         public ICommand tapGesture => new Command(tapGestureA);
 
         /// <summary>
@@ -27,16 +36,21 @@ namespace SLAPApp
 
             LoadStartConfig();
             collapseAllGrids();
-            AddColumnPageGrid.IsVisible = true;
+            MainRegAuthGrid.IsVisible = true;
             tmpButton.BackgroundColor = Color.FromHex("#E35930");
         }
-
+        /// <summary>
+        /// Внутренний метод для работы со страницами
+        /// </summary>
         public void collapseAllGrids()
         {
             MainPanelGrid.IsVisible = false;
             AddBoardPageGrid.IsVisible = false;
             MainRegAuthGrid.IsVisible = false;
             AddColumnPageGrid.IsVisible = false;
+            AddTaskPageGrid.IsVisible = false;
+            ProfileGrid.IsVisible = false;
+            AddUsersFromBoardPageGrid.IsVisible = false;
         }
 
         /// <summary>
@@ -109,8 +123,6 @@ namespace SLAPApp
         /// <summary>
         /// Метод отвечающий за загрузку стартовой конфигурации приложения
         /// </summary>
-        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
-        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
         public void LoadStartConfig()
         {
             object email;
@@ -133,6 +145,14 @@ namespace SLAPApp
                     if (User.hash_pass == CreateMD5(password.ToString()))
                     {
                         collapseAllGrids();
+
+                        UserEmail = AuthEmailEntry.Text;
+                        UserPassword = AuthPasswordEntry.Text;
+                        UserName = User.name;
+
+                        userNameLabel.Text = UserName;
+                        UserEmailLabel.Text = UserEmail;
+
                         MainPanelGrid.IsVisible = true;
                     }
                     else
@@ -209,6 +229,13 @@ namespace SLAPApp
                                 App.Current.Properties["password"] = AuthPasswordEntry.Text;
                             else
                                 App.Current.Properties.Add("password", AuthPasswordEntry.Text);
+
+                            UserEmail = AuthEmailEntry.Text;
+                            UserPassword = AuthPasswordEntry.Text;
+                            UserName = User.name;
+
+                            userNameLabel.Text = UserName;
+                            UserEmailLabel.Text = UserEmail;
                         }
                         else if(SwitchKeepLoggedMe.IsToggled == false)
                         {
@@ -270,6 +297,8 @@ namespace SLAPApp
                     {
                         WebClientClass webClient = new WebClientClass();
                         webClient.postRegUserData(RegEmailEntry.Text, CreateMD5(RegPasswordEntry.Text));
+                        AuthGrid.IsVisible = true;
+                        RegGrid.IsVisible = false;
                     }
                 }
                 else
@@ -277,14 +306,20 @@ namespace SLAPApp
                     DisplayAlert("Ошибка", "Поля не заполнены", "Ок");
                 }
             }
-            catch(Exception ex)
+            catch
             {
-                DisplayAlert("Ошибка", ex.ToString(), "Ок");
+                DisplayAlert("Ошибка", "Произошла непредвиденная ошибка, попробуйте снова или повторите попытку позже", "Ок");
             }
         }
-
+        /// <summary>
+        /// Метод отвечающий за добавление новых досок в меню
+        /// </summary>
+        /// <param name="backgroudColor">Цвет доски</param>
+        /// <param name="description">Название доски</param>
+        /// <param name="group">Маркер отвечающий за выбор типа доски(Личные - False, Групповые - True)</param>
         public void AddNewBoardMain(Color backgroudColor, string description, bool group)
         {
+            NameOfDesk = description;
             Frame frame = new Frame();
             frame.WidthRequest = 160;
             frame.BackgroundColor = backgroudColor;
@@ -292,13 +327,6 @@ namespace SLAPApp
             frame.CornerRadius = 15;
             frame.Padding = new Thickness(0, -20, 0, 0);
             frame.IsVisible = true;
-
-            var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += (s, e) => {
-                collapseAllGrids();
-                AddColumnPageGrid.IsVisible = true;
-            };
-            frame.GestureRecognizers.Add(tapGestureRecognizer);
 
             Grid grid = new Grid();
             
@@ -310,6 +338,14 @@ namespace SLAPApp
             label.VerticalOptions = LayoutOptions.End;
             label.HorizontalTextAlignment = TextAlignment.End;
             label.Padding = new Thickness(20, 20);
+
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) => {
+                collapseAllGrids();
+                AddColumnPageGrid.IsVisible = true;
+                NameOfDeskLabel.Text = NameOfDesk;
+            };
+            frame.GestureRecognizers.Add(tapGestureRecognizer);
 
             grid.Children.Add(label);
             frame.Content = grid;
@@ -332,7 +368,9 @@ namespace SLAPApp
             }
             condition = 0;
         }
-
+        /// <summary>
+        /// Метод отвечающий за добавления новых столбцов в доску
+        /// </summary>
         public void AddNewColumns()
         {
             Frame frame = new Frame();
@@ -412,13 +450,30 @@ namespace SLAPApp
             tmpGrid.WidthRequest = 40;
             columnsStackLayout.Children.Add(tmpGrid);
         }
-
+        /// <summary>
+        /// Метод отвечающий за изменение параметров доски
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
         private void saveChangesButton_Clicked(object sender, EventArgs e)
         {
-            AddNewBoardMain(tmpButton.BackgroundColor, deskNameEditor.Text, groupCheckBox.IsChecked);
-            collapseAllGrids();
-            MainPanelGrid.IsVisible = true;
+            if(!groupCheckBox.IsChecked)
+            {
+                AddNewBoardMain(tmpButton.BackgroundColor, deskNameEditor.Text, groupCheckBox.IsChecked);
+                collapseAllGrids();
+                MainPanelGrid.IsVisible = true;
+            }
+            else
+            {
+                collapseAllGrids();
+                AddUsersFromBoardPageGrid.IsVisible = true;
+            }
         }
+        /// <summary>
+        /// Метод отвечающий за выбор цвета доски в редакторе досок
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
         private void SelectColorButton_Clicked(object sender, EventArgs e)
         {
             tmpButton.BorderWidth = 0;
@@ -428,10 +483,226 @@ namespace SLAPApp
             deskFrame.BackgroundColor = tmpButton.BackgroundColor;
             deskEditorFrame.BackgroundColor = tmpButton.BackgroundColor;
         }
+        /// <summary>
+        /// Метод отвечающий за создание графической составляющей таска
+        /// </summary>
+        /// <param name="TaskName"></param>
+        /// <returns></returns>
+        public Frame AddNewTask(string TaskName = "Task") 
+        {
+            Frame taskFrame = new Frame();
+            taskFrame.HeightRequest = 40;
+            taskFrame.HasShadow = true;
+            taskFrame.BorderColor = Color.Gray;
 
+            Button TaskButton = new Button();
+            TaskButton.TextColor = Color.FromHex("#142453");
+            TaskButton.Text = TaskName;
+            TaskButton.FontSize = 22;
+            TaskButton.HorizontalOptions = LayoutOptions.Start;
+            TaskButton.VerticalOptions = LayoutOptions.Center;
+            TaskButton.Margin = new Thickness(-20);
+            TaskButton.BackgroundColor = Color.Transparent;
+
+            TaskButton.Clicked += (s, e) => {
+                tmpButtonName = new Button();
+                tmpButtonName = s as Button;
+                collapseAllGrids();
+                AddTaskPageGrid.IsVisible = true;
+            };
+
+            taskFrame.Content = TaskButton;
+            return taskFrame;
+        }
+        /// <summary>
+        /// Промежуточный метод отвечающий за добавление новых тасков в столбец
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
         private void addTask3Button_Clicked(object sender, EventArgs e)
         {
+            column3StackLayout.Children.Add(AddNewTask());
+        }
+        /// <summary>
+        /// Промежуточный метод отвечающий за добавление новых тасков в столбец
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void addTask1Button_Clicked(object sender, EventArgs e)
+        {
+            column1StackLayout.Children.Add(AddNewTask());
+        }
+        /// <summary>
+        /// Промежуточный метод отвечающий за добавление новых тасков в столбец
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void addTask2Button_Clicked(object sender, EventArgs e)
+        {
+            column2StackLayout.Children.Add(AddNewTask());
+        }
+        /// <summary>
+        /// Метод отвечающий за добавление новых столбцов в доску
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void AddColumn_Clicked(object sender, EventArgs e)
+        {
+            if(Column1.IsVisible)
+            {
+                Column2.IsVisible = true;
+            }
+            else if(Column2.IsVisible)
+            {
+                Column3.IsVisible = true;
+            }
+        }
+        /// <summary>
+        /// Метод отвечающий за возвращение к предыдущей странице в стеке
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void BackButton_Clicked(object sender, EventArgs e)
+        {
+            collapseAllGrids();
+            AddColumnPageGrid.IsVisible = true;
+        }
+        /// <summary>
+        /// Метод отвечающий за удаление таска
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void DeleteTaskButton_Clicked(object sender, EventArgs e)
+        {
+            //tmpButtonName.Parent.ClearValue( );
+        }
+        /// <summary>
+        /// Метод отвечающий за сохранение изменений в таске
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void saveTaskChangesButton_Clicked(object sender, EventArgs e)
+        {
+            tmpButtonName.Text = TaskNameEditor.Text;
+            tasks.Add(new Tasks { 
+                name = TaskNameEditor.Text, 
+                desc = descriptionTask.Text, 
+                start_date = TaskDateStartDatePicker.Date.ToShortDateString(), 
+                end_date = TaskDateEndDatePicker.Date.ToShortDateString()
+            });
+        }
+        /// <summary>
+        /// Метод отвечающий за возвращение к предыдущей странице в стеке
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void ProfileToMainBackButton_Clicked(object sender, EventArgs e)
+        {
+            collapseAllGrids();
+            MainPanelGrid.IsVisible = true;
+        }
+        /// <summary>
+        /// Метод отвечающий за удаление аккаунта
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private async void DeleteAccountButton_Clicked(object sender, EventArgs e)
+        {
+            bool flag = await DisplayAlert("Уведомление", "Вы уверены, что хотите удалить аккаунт?", "Да", "Нет");
+            if(flag)
+            {
+                collapseAllGrids();
+                MainRegAuthGrid.IsVisible = true;
+                StartPageGrid.IsVisible = true;
+                AuthGrid.IsVisible = false;
+                RegGrid.IsVisible = false;
+                MainPanelGrid.IsVisible = false;
+            }
+        }
+        /// <summary>
+        /// Метод отвечающий за выход из аккаунта на страницу авторизации
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void exitFromAccountButton_Clicked(object sender, EventArgs e)
+        {
+            collapseAllGrids();
+            MainRegAuthGrid.IsVisible = true;
+            StartPageGrid.IsVisible = false;
+            AuthGrid.IsVisible = true;
+            RegGrid.IsVisible = false;
+            MainPanelGrid.IsVisible = false;
+        }
+        /// <summary>
+        /// Метод отвечающий за сохранение изменений аккаунта
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void saveAccountChangesButton_Clicked(object sender, EventArgs e)
+        {
+            UserName = UserNameEntry.Text;
+            userNameLabel.Text = UserName;
+            collapseAllGrids();
+            MainPanelGrid.IsVisible = true;
+        }
+        /// <summary>
+        /// Метод отвечающий за открытия страницы профиля
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void userDataButton_Clicked(object sender, EventArgs e)
+        {
+            collapseAllGrids();
+            ProfileGrid.IsVisible = true;
+        }
+        /// <summary>
+        /// Метод отвечающий за возвращение к предыдущей странице в стеке
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void ButtonBackToMainAddBoard_Clicked(object sender, EventArgs e)
+        {
+            collapseAllGrids();
+            AddBoardPageGrid.IsVisible = true;
+        }
+        /// <summary>
+        /// Метод отвечающий за добавление новых пользователей в групповую доску
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void addUserInDeskButton_Clicked(object sender, EventArgs e)
+        {
+            if(!happyFlag)
+            {
+                Thread.Sleep(2000);
+                DisplayAlert("Уведомление", "Пользователь не хочет к вам присоединяться", "Жаль");
+                happyFlag = true;
+            }
+            else
+            {
+                Thread.Sleep(1500);
+                DisplayAlert("Уведомление", "Пользователь успешно добавлен", "Ок");
 
+            }
+                
+        }
+        /// <summary>
+        /// Метод отвечающий за завершение процедуры добавления новых пользователей в групповую доску
+        /// </summary>
+        /// <param name="sender">Параметр, который содержит ссылку на объект, который вызвал событие</param>
+        /// <param name="e">Содержит дополнительную информацию о вызываемом событии</param>
+        private void doneAddUsersButton_Clicked(object sender, EventArgs e)
+        {
+            collapseAllGrids();
+            MainPanelGrid.IsVisible = true;
+            AddColumn_Clicked(sender, e);
+            KostilEditor.Text = "Работа";
+            column1StackLayout.Children.Add(AddNewTask("Добить проект"));
+            column1StackLayout.Children.Add(AddNewTask("Выгореть"));
+
+            AddNewBoardMain(tmpButton.BackgroundColor, deskNameEditor.Text, groupCheckBox.IsChecked);
+            collapseAllGrids();
+            MainPanelGrid.IsVisible = true;
         }
     }
 
@@ -449,7 +720,7 @@ namespace SLAPApp
     {
         public int column_id { get; set; }
         public string name { get; set; }
-        public Tasks tasks { get; set; }
+        public List<Tasks> tasks { get; set; }
     }
 
     public class Root
@@ -459,7 +730,6 @@ namespace SLAPApp
 
     public class Tasks
     {
-        public int task_id { get; set; }
         public string name { get; set; }
         public string desc { get; set; }
         public string start_date { get; set; }

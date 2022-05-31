@@ -22,6 +22,14 @@ namespace SLAPApp
             return User;
         }
         /// <summary>
+        /// Метод отвечающий за удаление пользователя
+        /// </summary>
+        /// <param name="email">Параметр, отвечающий за почту пользователя</param>
+        public void DeleteUserAccount(string email)
+        {
+
+        }
+        /// <summary>
         /// Метод отвечающий за асинхронную загрузку данных пользователя
         /// </summary>
         /// <param name="email">Параметр, отвечающий за почту пользователя</param>
@@ -60,7 +68,7 @@ namespace SLAPApp
             regUserClass.hashPass = password;
             regUserClass.name = "User" + new Random().Next(100000,1000000).ToString();
             string json = JsonConvert.SerializeObject(regUserClass);
-            return postData(json, "http://194.87.99.112:8080/users");
+            postData(json, "http://194.87.99.112:8080/users");
         }
         /// <summary>
         /// Метод отвечающий за отправку json файла на сервер
@@ -71,7 +79,7 @@ namespace SLAPApp
         {
             WebClient wc = new WebClient();
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-            return wc.UploadString(url, json);
+            wc.UploadString(url, json);
         }
     }
 

@@ -36,7 +36,7 @@
                    x:Name="deskFrame"
                    IsVisible="false">
                 <Grid>
-                    <Label Text=""
+                    <Label Text="Главная"
                            x:Name="deskFrameLabelNameOfBoard"
                            TextColor="White"
                            FontSize="Large"
@@ -51,28 +51,59 @@
             <Frame Grid.Row="0"/>
             <Grid Grid.Row="0" x:Name="GridMainServiceBar">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="170"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" 
-                    Margin="5" 
-                    ImageSource="menu.png" 
-                    BackgroundColor="Transparent"/>
+                <Label Grid.Column="0" 
+                       Text="Главная"
+                       TextColor="#142453"
+                       Margin="30,0" 
+                       VerticalOptions="Center"
+                       FontSize="26"/>
 
                 <Button Grid.Column="2" 
                     Margin="5" 
-                    ImageSource="setting.png" 
+                    ImageSource="pen.png" 
                     BackgroundColor="Transparent"/>
             </Grid>
 
             <!--GridUser Pole-->
             <Frame Grid.Row="1"/>
             <Grid Grid.Row="1" x:Name="GridUser">
-                <Label Text="Рано или поздно что-то вкорячим" 
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame BackgroundColor="#142453"
+                       Grid.Column="0"/>
+                <Grid Grid.Column="1">
+                    <StackLayout Orientation="Vertical">
+                        <Label Grid.Column="0" 
+                               x:Name="userNameLabel"
+                       Text="Привет, "
+                       TextColor="#142453"
+                       Margin="30,10,0,0" 
+                       VerticalOptions="Center"
+                       FontSize="20"/>
+                        <Label Grid.Column="0" 
+                       Text="Перейти в профиль"
+                       TextColor="Gray"
+                       Margin="30,-5" 
+                       VerticalOptions="Center"
+                       FontSize="14"/>
+                    </StackLayout>
+                </Grid>
+
+                <Button ImageSource="rigthArrow.png"
+                        Margin="0,0,17,0"
+                        Grid.Column="2"
+                        x:Name="userDataButton"
+                        Clicked="userDataButton_Clicked"
+                        BackgroundColor="Transparent"/>
             </Grid>
 
             <!--GridBoardPanel Pole-->
@@ -373,6 +404,147 @@
             </Grid>
         </Grid>
 
+        <Grid x:Name="ProfileGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0"/>
+            <Grid Grid.Row="0" x:Name="GridProfileServiceBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                    x:Name="ProfileToMainBackButton"
+                    Margin="5" 
+                    ImageSource="left.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ProfileToMainBackButton_Clicked"/>
+
+                <Label Grid.Column="1" Text="Профиль"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontFamily="Roboto"
+                   TextColor="#142453"
+                   FontSize="24"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="57"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="57"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <ScrollView Orientation="Vertical">
+                        <StackLayout Orientation="Vertical">
+                            <Grid HeightRequest="15"/>
+                            <Label x:Name="UserEmailLabel"
+                                   Text="mymail@mail.mail"
+                                    HeightRequest="50"
+                                    FontSize="26"
+                                    VerticalOptions="End"
+                                    TextColor="#142453"/>
+                            
+                            <Label Text="Сменить имя"
+                                   Margin="20,0,0,-7"
+                                    FontSize="18"
+                                    VerticalOptions="End"
+                                    TextColor="#142453"/>
+                            <Frame BorderColor="#142453"
+                                   CornerRadius="20">
+                                <Entry x:Name="UserNameEntry"
+                                       Placeholder="Имя пользователя"
+                                       FontSize="20"
+                                       Margin="-10"
+                                       PlaceholderColor="#142453"/>
+                            </Frame>
+
+                            <Grid HeightRequest="10"/>
+                            <Label Text="Сменить пароль"
+                                   Margin="20,0,0,-7"
+                                    FontSize="18"
+                                    VerticalOptions="End"
+                                    TextColor="#142453"/>
+                            <Frame BorderColor="#142453"
+                                   CornerRadius="20">
+                                <StackLayout>
+                                    <Entry x:Name="oldPasswordEntry"
+                                           Placeholder="Старый пароль"
+                                           FontSize="22"
+                                           Margin="-10"
+                                           PlaceholderColor="#142453"/>
+                                    <Grid HeightRequest="10"/>
+                                    <Entry x:Name="newPasswordEntry"
+                                           Placeholder="Новый пароль"
+                                           FontSize="22"
+                                           Margin="-10"
+                                           PlaceholderColor="#142453"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Grid HeightRequest="30"/>
+
+                            <Button x:Name="DeleteAccountButton"
+                                    HeightRequest="68"
+                                    WidthRequest="286"
+                                    HorizontalOptions="Center"
+                                    Text="Удалить аккаунт"
+                                    TextTransform="None"
+                                    FontSize="24"
+                                    FontFamily="Roboto"
+                                    TextColor="#E33030"
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="10"
+                                    BorderColor="#E33030"
+                                    BorderWidth="3"
+                                    Clicked="DeleteAccountButton_Clicked"/>
+
+                            <Grid HeightRequest="3"/>
+
+                            <Button x:Name="exitFromAccountButton"
+                                    HeightRequest="68"
+                                    WidthRequest="286"
+                                    HorizontalOptions="Center"
+                                    Text="Выйти из аккаунта"
+                                    TextTransform="None"
+                                    FontSize="24"
+                                    FontFamily="Roboto"
+                                    TextColor="Gray"
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="10"
+                                    BorderColor="Gray"
+                                    BorderWidth="3"
+                                    Clicked="exitFromAccountButton_Clicked"/>
+
+                            <Grid HeightRequest="3"/>
+
+                            <Button x:Name="saveAccountChangesButton"
+                                    HeightRequest="68"
+                                    WidthRequest="286"
+                                    HorizontalOptions="Center"
+                                    Text="Сохранить"
+                                    TextTransform="None"
+                                    FontSize="24"
+                                    FontFamily="Roboto"
+                                    TextColor="#142453"
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="10"
+                                    BorderColor="#142453"
+                                    BorderWidth="3"
+                                    Clicked="saveAccountChangesButton_Clicked"/>
+
+                            <Grid HeightRequest="20"/>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+        </Grid>
+
         <Grid x:Name="AddBoardPageGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -524,6 +696,97 @@
             </Grid>
         </Grid>
 
+        <Grid x:Name="AddUsersFromBoardPageGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0"/>
+            <Grid Grid.Row="0" x:Name="GridAddUsersInBoardServiceBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                    x:Name="ButtonBackToMainAddBoard"
+                    Margin="5" 
+                    ImageSource="left.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonBackToMainAddBoard_Clicked"/>
+
+                <Label Grid.Column="1" Text="Изменить доску" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontFamily="Roboto"
+                   TextColor="#142453"
+                   FontSize="24"/>
+                
+                
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="57"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="57"/>
+                </Grid.ColumnDefinitions>
+                <ScrollView Grid.Column="1">
+                    <StackLayout Orientation="Vertical">
+                        <Grid HeightRequest="30"/>
+                        <Label Grid.Column="1" Text="Введите почту нового участника доски:" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontFamily="Roboto"
+                   TextColor="#142453"
+                   FontSize="24"/>
+
+                        <Entry HeightRequest="60"
+                           Placeholder="newuser@mail.reg"
+                           FontSize="22"
+                           PlaceholderColor="Gray"/>
+
+                        <Grid HeightRequest="250"/>
+
+                        <Button x:Name="addUserInDeskButton"
+                                    HeightRequest="68"
+                                    WidthRequest="286"
+                                    HorizontalOptions="Center"
+                                    Text="Добавить"
+                                    TextTransform="None"
+                                    FontSize="24"
+                                    FontFamily="Roboto"
+                                    TextColor="White"
+                                    BackgroundColor="#142453"
+                                    CornerRadius="10"
+                                    BorderWidth="3"
+                                    Clicked="addUserInDeskButton_Clicked"/>
+
+                        <Grid HeightRequest="3"/>
+
+                        <Button x:Name="doneAddUsersButton"
+                                    HeightRequest="68"
+                                    WidthRequest="286"
+                                    HorizontalOptions="Center"
+                                    Text="Завершить"
+                                    TextTransform="None"
+                                    FontSize="24"
+                                    FontFamily="Roboto"
+                                    TextColor="#142453"
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="10"
+                                    BorderColor="#142453"
+                                    BorderWidth="3"
+                                    Clicked="doneAddUsersButton_Clicked"/>
+
+                        <Grid HeightRequest="20"/>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            
+            
+        </Grid>
+
         <Grid x:Name="AddColumnPageGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -544,7 +807,8 @@
                     BackgroundColor="Transparent"
                     Clicked="ButtonBackToMain_Clicked"/>
 
-                <Label Grid.Column="1" Text="Дом" 
+                <Label Grid.Column="1"
+                       x:Name="NameOfDeskLabel"
                    VerticalOptions="Center" 
                    HorizontalOptions="Fill"
                    FontFamily="Roboto"
@@ -573,30 +837,25 @@
                                         <Frame BackgroundColor="#E35930"
                                                HeightRequest="40"
                                                Margin="-20">
-                                            <Editor TextColor="White"
-                                                   Text="dfjbdh"
-                                                   FontSize="22"
-                                                   HorizontalOptions="Start"
-                                                   VerticalOptions="Center"/>
+                                            <Entry TextColor="White"
+                                                    Text="Column1"
+                                                    FontSize="22"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="310"
+                                                    Margin="0,-10"
+                                                    x:Name="KostilEditor"/>
                                         </Frame>
                                         <Grid HeightRequest="20"/>
                                         <ScrollView Orientation="Vertical">
                                             <StackLayout x:Name="column1StackLayout">
-                                                <Frame HeightRequest="40"
-                                                       HasShadow="True"
-                                                       BorderColor="Gray">
-                                                    <Button TextColor="#142453"
-                                                            Text="Task"
-                                                            FontSize="22"
-                                                            HorizontalOptions="Start"
-                                                            VerticalOptions="Center"
-                                                            Margin="-20"
-                                                            BackgroundColor="Transparent"/>
-                                                </Frame>
+                                                
                                             </StackLayout>
                                         </ScrollView>
                                     </StackLayout>
                                     <Button Text="+"
+                                            x:Name="addTask1Button"
+                                            Clicked="addTask1Button_Clicked"
                                             TextColor="#142453"
                                             FontSize="44"
                                             FontFamily="Roboto"
@@ -621,25 +880,15 @@
                                                HeightRequest="40"
                                                Margin="-20">
                                             <Editor TextColor="White"
-                                                   Text="dfjbdh"
-                                                   FontSize="22"
-                                                   HorizontalOptions="Start"
-                                                   VerticalOptions="Center"/>
+                                                    Margin="0,-10"
+                                                    Text="Column2"
+                                                    FontSize="22"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Center"/>
                                         </Frame>
                                         <Grid HeightRequest="20"/>
                                         <ScrollView Orientation="Vertical">
                                             <StackLayout x:Name="column2StackLayout">
-                                                <Frame HeightRequest="40"
-                                                       HasShadow="True"
-                                                       BorderColor="Gray">
-                                                    <Button TextColor="#142453"
-                                                            Text="Task"
-                                                            FontSize="22"
-                                                            HorizontalOptions="Start"
-                                                            VerticalOptions="Center"
-                                                            Margin="-20"
-                                                            BackgroundColor="Transparent"/>
-                                                </Frame>
                                             </StackLayout>
                                         </ScrollView>
                                     </StackLayout>
@@ -648,7 +897,9 @@
                                             FontSize="44"
                                             FontFamily="Roboto"
                                             BackgroundColor="Transparent"
-                                            HorizontalOptions="Center"/>
+                                            HorizontalOptions="Center"
+                                            x:Name="addTask2Button"
+                                            Clicked="addTask2Button_Clicked"/>
                                 </StackLayout>
                             </Frame>
                             <Grid WidthRequest="40"
@@ -661,32 +912,22 @@
                                    HasShadow="True"
                                    WidthRequest="290"
                                    BorderColor="Gray"
-                                   IsVisible = "true">
+                                   IsVisible = "false">
                                 <StackLayout>
                                     <StackLayout>
                                         <Frame BackgroundColor="#E35930"
                                                HeightRequest="40"
                                                Margin="-20">
                                             <Editor TextColor="White"
-                                                   Text="dfjbdh"
-                                                   FontSize="22"
-                                                   HorizontalOptions="Start"
-                                                   VerticalOptions="Center"/>
+                                                    Text="Column3"
+                                                    FontSize="22"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Center"
+                                                    Margin="0,-10"/>
                                         </Frame>
                                         <Grid HeightRequest="20"/>
                                         <ScrollView Orientation="Vertical">
                                             <StackLayout x:Name="column3StackLayout">
-                                                <Frame HeightRequest="40"
-                                                       HasShadow="True"
-                                                       BorderColor="Gray">
-                                                    <Button TextColor="#142453"
-                                                            Text="Task"
-                                                            FontSize="22"
-                                                            HorizontalOptions="Start"
-                                                            VerticalOptions="Center"
-                                                            Margin="-20"
-                                                            BackgroundColor="Transparent"/>
-                                                </Frame>
                                             </StackLayout>
                                         </ScrollView>
                                     </StackLayout>
@@ -699,10 +940,25 @@
                                             BackgroundColor="Transparent"
                                             HorizontalOptions="Center"/>
                                 </StackLayout>
-                            </Frame>
+                            </Frame> 
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
+                <Frame WidthRequest="32"
+                       HeightRequest="32"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       CornerRadius="42"
+                       Margin="20,20"
+                       BackgroundColor="#E35930">
+                    <Button x:Name="AddColumn"
+                            Clicked="AddColumn_Clicked"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            Text="+"
+                            FontSize="32"
+                            Padding="-30"/>
+                </Frame>
             </Grid>
 
             <Frame Grid.Row="2"/>
@@ -729,6 +985,142 @@
                     Clicked="ButtonAdd_Clicked"/>
                 <Button Grid.Column="5" Margin="5" 
                     x:Name="ButtonCalendar2"
+                    ImageSource="calendar_1.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonCalendar_Clicked"/>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="AddTaskPageGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            
+            
+            <Frame Grid.Row="0"/>
+            <Grid Grid.Row="0" x:Name="GridAddTaskServiceBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                    x:Name="BackButton"
+                    Margin="5" 
+                    ImageSource="left.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="BackButton_Clicked"/>
+
+                <Label Grid.Column="1" Text="Редактирование таска" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Fill"
+                   FontFamily="Roboto"
+                   TextColor="#142453"
+                   FontSize="24"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="57"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="57"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <ScrollView Orientation="Vertical">
+                        <StackLayout Orientation="Vertical">
+                            <Editor x:Name="TaskNameEditor"
+                                    HeightRequest="50"
+                                    Placeholder="Task"
+                                    FontSize="22"
+                                    VerticalOptions="End"
+                                    PlaceholderColor="#142453"/>
+
+                            <Grid HeightRequest="40"/>
+                            <Frame HeightRequest="120"
+                                   BorderColor="Gray">
+                                <Editor x:Name="descriptionTask"
+                                        HeightRequest="260"
+                                        Placeholder="Описание"
+                                        FontSize="22"
+                                        PlaceholderColor="#142453"/>
+                            </Frame>
+
+                            <DatePicker x:Name="TaskDateStartDatePicker"
+                                    HeightRequest="50"
+                                    FontSize="22"
+                                    VerticalOptions="End"
+                                        Format="D"
+                                        TextColor="#142453"/>
+
+                            <DatePicker x:Name="TaskDateEndDatePicker"
+                                    HeightRequest="50"
+                                    FontSize="22"
+                                    VerticalOptions="End"
+                                        Format="D"
+                                        TextColor="#142453"/>
+
+                            <Button x:Name="DeleteTaskButton"
+                                    HeightRequest="68"
+                                    WidthRequest="286"
+                                    HorizontalOptions="Center"
+                                    Text="Удалить"
+                                    TextTransform="None"
+                                    FontSize="24"
+                                    FontFamily="Roboto"
+                                    TextColor="#E33030"
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="10"
+                                    BorderColor="#E33030"
+                                    BorderWidth="3"
+                                    Clicked="DeleteTaskButton_Clicked"/>
+
+                            <Button x:Name="saveTaskChangesButton"
+                                    HeightRequest="68"
+                                    WidthRequest="286"
+                                    HorizontalOptions="Center"
+                                    Text="Сохранить"
+                                    TextTransform="None"
+                                    FontSize="24"
+                                    FontFamily="Roboto"
+                                    TextColor="#142453"
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="10"
+                                    BorderColor="#142453"
+                                    BorderWidth="3"
+                                    Clicked="saveTaskChangesButton_Clicked"/>
+
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+
+            <Frame Grid.Row="2"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Margin="5"
+                    x:Name="ButtonHome3"
+                    ImageSource="home.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonHome_Clicked"/>
+                <Button Grid.Column="3" Margin="5"
+                    x:Name="ButtonAdd3"
+                    ImageSource="add.png" 
+                    BackgroundColor="Transparent"
+                    Clicked="ButtonAdd_Clicked"/>
+                <Button Grid.Column="5" Margin="5" 
+                    x:Name="ButtonCalendar3"
                     ImageSource="calendar_1.png" 
                     BackgroundColor="Transparent"
                     Clicked="ButtonCalendar_Clicked"/>
